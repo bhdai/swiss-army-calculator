@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream> // for parsing input
 #include "mathfuncs.h"
+#include "randfuncs.h"
 
 
 void printHelp() {
@@ -13,8 +14,9 @@ void printHelp() {
   std::cout << "  sub <num1> <num2>    - Subtracts second number from first." << std::endl;
   std::cout << "  mul <num1> <num2>    - Multiplies two numbers." << std::endl;
   std::cout << "  div <num1> <num2>    - Divides first number by second." << std::endl;
+  std::cout << "  flip                 - Flips a coin (Heads/Tails)." << std::endl;
+  std::cout << "  roll <sides>         - Rolls a dice with specified sides (e.g., 6 or 20)." << std::endl;
   std::cout << "  exit                 - Exits the calculator." << std::endl;
-  // Add help for random functions later when rand_feat is merged
 }
 
 int main() {
@@ -54,6 +56,19 @@ int main() {
         }
       } catch (const std::runtime_error& e) {
         std::cerr << e.what() << std::endl;
+      }
+
+    } else if (command == "flip") {
+        flipCoin();
+    } else if (command == "roll") {
+      int sides;
+      if (!(ss >> sides)) {
+          std::cerr << "Error: Please provide the number of sides for the dice." << std::endl;
+          continue;
+      }
+      int result = rollDice(sides);
+      if (result != -1) { 
+          std::cout << "Result: " << result << std::endl;
       }
     } else {
       std::cerr << "Unkown command. Type 'help' for available command." << std::endl;
