@@ -1,0 +1,26 @@
+name: C/C++ CI Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up build environment (Install G++)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ make
+        
+    - name: Build the project using Makefile
+      run: make
+
+    - name: Check for executable
+      run: file calculator
