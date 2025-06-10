@@ -1,6 +1,8 @@
 #include "mathfuncs.h"
 #include <stdexcept>
 
+// this comment's just for testing make
+
 double add(double a, double b) {
   return a + b;
 }
